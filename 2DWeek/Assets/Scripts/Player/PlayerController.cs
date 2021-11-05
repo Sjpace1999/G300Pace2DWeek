@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,9 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
 
-    public Text text;
+    public TextMeshProUGUI scoreText;
+
+    private int score=0;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+
     }
 
     void FixedUpdate()
@@ -61,6 +65,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("IsRunning", false);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            score++;
+            Destroy(other.gameObject);
+            scoreText.text = "Score: " + score;
         }
     }
 
