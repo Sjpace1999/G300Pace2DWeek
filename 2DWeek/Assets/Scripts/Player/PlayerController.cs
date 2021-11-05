@@ -36,17 +36,19 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        Vector2 direction = new Vector2(horizontalInput * runSpeed * Time.deltaTime, 0);
+        rigidBody2d.velocity = new Vector2(runSpeed*Time.deltaTime*horizontalInput, rigidBody2d.velocity.y);
 
-        rigidBody2d.AddForce(direction);
+        //Vector2 direction = new Vector2(horizontalInput * runSpeed * Time.deltaTime, 0);
+
+        //rigidBody2d.AddForce(direction);
 
         if (rigidBody2d.velocity.x > 0)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = true;
         }
         else if(rigidBody2d.velocity.x < 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = false;
         }
 
         if (Mathf.Abs(horizontalInput) > 0f)
